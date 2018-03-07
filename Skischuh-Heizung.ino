@@ -29,8 +29,8 @@
 // the setup routine runs once when you press reset:
 void setup() {
   pinMode(PIN_MOSFET_L, OUTPUT);
-  pinMode(PIN_S_L_1,    INPUT_PULLUP);
-  pinMode(PIN_S_L_2,    INPUT_PULLUP);
+  pinMode(PIN_S_L_1,    INPUT_PULLUP); // Pullup: falls Schalter nicht auf PIN durchschlatet, ist der PIN HIGH
+  pinMode(PIN_S_L_2,    INPUT_PULLUP); // Das heisst, dass die Schalter mit GND verbunden sein muessen
   pinMode(PIN_S_L_3,    INPUT_PULLUP);
   pinMode(PIN_AA_L,     INPUT_PULLUP);
   pinMode(PIN_MOSFET_R, OUTPUT);
@@ -46,27 +46,27 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  if(digitalRead(PIN_AA_L) == HIGH) { // Ok, links an
-    if(digitalRead(PIN_S_L_3) == HIGH) { // Level 4 
+  if(digitalRead(PIN_AA_L) == LOW) { // Ok, links an
+    if(digitalRead(PIN_S_L_3) == LOW) { // Level 4 
       analogWrite( PIN_MOSFET_L, POWER_LEVEL_4);
     } else 
-    if(digitalRead(PIN_S_L_2) == HIGH) { // Level 3
+    if(digitalRead(PIN_S_L_2) == LOW) { // Level 3
       analogWrite( PIN_MOSFET_L, POWER_LEVEL_3);
     } else 
-    if(digitalRead(PIN_S_L_1) == HIGH) { // Level 2 
+    if(digitalRead(PIN_S_L_1) == LOW) { // Level 2 
       analogWrite( PIN_MOSFET_L, POWER_LEVEL_2);
     } else                               // Level 1 
       analogWrite( PIN_MOSFET_L, POWER_LEVEL_1); 
   }
   
-  if(digitalRead(PIN_AA_R) == HIGH) { // Ok, rechts an
-    if(digitalRead(PIN_S_R_3) == HIGH) { // Level 4 
+  if(digitalRead(PIN_AA_R) == LOW) { // Ok, rechts an
+    if(digitalRead(PIN_S_R_3) == LOW) { // Level 4 
       analogWrite( PIN_MOSFET_R, POWER_LEVEL_4);
     } else 
-    if(digitalRead(PIN_S_R_2) == HIGH) { // Level 3 
+    if(digitalRead(PIN_S_R_2) == LOW) { // Level 3 
       analogWrite( PIN_MOSFET_R, POWER_LEVEL_3);
     } else 
-    if(digitalRead(PIN_S_R_1) == HIGH) { // Level 2
+    if(digitalRead(PIN_S_R_1) == LOW) { // Level 2
       analogWrite( PIN_MOSFET_R, POWER_LEVEL_2);
     } else                               // Level 1 
       analogWrite( PIN_MOSFET_L, POWER_LEVEL_1); 
